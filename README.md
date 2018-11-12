@@ -1,4 +1,4 @@
-# Chaton
+# Pandan
 
 Pandan is a small library to make decisions from sequences of evidences.
 
