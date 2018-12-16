@@ -1,5 +1,29 @@
 from collections import Counter
 
+class Decision(object):
+    def __init__(self):
+        self.belief = None
+        self.certainty = None
+
+class NumericPandan(object):
+    def __init__(self, decision_name, N):
+        self.N = N
+        self.decision_name = decision_name
+        self.evidences = []
+        # decision = (belief, certainty)
+        self.decision = (None, None)
+
+    def get_decision(self):
+        return self.decision
+
+    def add_evidence(self, evidence):
+        # do evidence accumulation if there's no decision
+        if len(self.evidences) < self.N:
+            self.evidences.append(evidence)
+        if len(self.evidences) == self.N:
+            self.decision = (sum(self.evidences,0.0)/self.N)
+        return self.decision
+
 class Pandan(object):
     def __init__(self, decision_name, N, min_confidence):
         self.N = N
@@ -32,34 +56,3 @@ class Pandan(object):
                 self.evidences.append(evidence)
         #print(self.N)
         return self.decision
-
-if __name__ == "__main__":
-    p = Pandan("decision01", 10, 0.7)
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user02"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user03"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user02"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user03"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user02"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user03"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
-    print(p.add_evidence("user01"))
